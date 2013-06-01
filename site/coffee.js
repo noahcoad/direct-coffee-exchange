@@ -1,5 +1,16 @@
 Growers = new Meteor.Collection("growers");
 
+Meteor.Router.add({
+		  '/news': 'news',
+
+		  '/about': function() {
+		    if (Session.get('aboutUs')) {
+		      return 'aboutUs';
+		    } else {
+		      return 'aboutThem';
+		    }
+		  }
+		});
 if (Meteor.isClient) {
 	Template.featured.growers = function () {
 		return Growers.find({}, {sort: {score: -1, name: 1}});
@@ -26,7 +37,6 @@ if (Meteor.isClient) {
 		}
 	});
 }
-
 if (Meteor.isServer) {
 	Meteor.startup(function () {
 		if (Growers.find().count() === 0) {
