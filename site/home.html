@@ -1,0 +1,36 @@
+<head>
+	<title>Direct Coffee Exchange</title>
+</head>
+
+<body>
+  <div id="outer">
+    {{> featured}}
+  </div>
+</body>
+
+<template name="featured">
+  <div class="featured">
+    {{#each growers}}
+      {{> grower}}
+    {{/each}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <input type="button" class="inc" value="Inc rating 5 points" />
+  </div>
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click a grower to select</div>
+  {{/unless}}
+</template>
+
+<template name="grower">
+  <div class="grower {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="rating">{{rating}}</span>
+  </div>
+</template>
+
