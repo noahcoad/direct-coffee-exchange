@@ -11,6 +11,7 @@ Meteor.Router.add({
 		    }
 		  }
 		});
+
 if (Meteor.isClient) {
 	Template.featured.growers = function () {
 		return Growers.find({}, {sort: {score: -1, name: 1}});
@@ -34,16 +35,6 @@ if (Meteor.isClient) {
 	Template.grower.events({
 		'click': function () {
 			Session.set("selected_grower", this._id);
-		}
-	});
-}
-if (Meteor.isServer) {
-	Meteor.startup(function () {
-		if (Growers.find().count() === 0) {
-			var names = ["Fondo Perez",
-									 "Dean's Beans"];
-			for (var i = 0; i < names.length; i++)
-				Growers.insert({name: names[i], rating: Math.floor(Math.random()*10)*5});
 		}
 	});
 }
